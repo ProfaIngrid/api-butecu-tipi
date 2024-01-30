@@ -9,14 +9,16 @@ const express = require('express');
 //inicializa a aplicação express
 const app = express();
 
+
 //definindo a porta na qual o servidor irá rodar
 const port = 3000;
 
 const produtosRoutes = require('./routes/produtosRoutes');
+const funcionarioRoutes = require('./routes/funcionariosRoutes');
 
-
+app.use(express.json());
 app.use('/produtos', produtosRoutes);
-
+app.use('/funcionarios', funcionarioRoutes);
 
 //configuração de uma rota para raiz ('/') da aplicação
 app.get('/', (req, res) => {
