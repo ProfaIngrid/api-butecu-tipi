@@ -8,10 +8,13 @@ const express = require('express');
 
 //inicializa a aplicação express
 const app = express();
+const cors = require("cors");
 
 
 //definindo a porta na qual o servidor irá rodar
 const port = 3000;
+app.use(cors());
+
 
 const produtosRoutes = require('./routes/produtosRoutes');
 const funcionarioRoutes = require('./routes/funcionariosRoutes');
@@ -37,7 +40,7 @@ app.listen(port, () => {
 /*
 Create(post) --> insert
 Read(get) --> select
-Update(put)  --> update
+Update(put e patch)  --> update
 Delete(delete)  --> delete
 */
 

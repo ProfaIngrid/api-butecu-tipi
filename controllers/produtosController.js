@@ -32,4 +32,41 @@ router.post('/', (req,res) => {
 });
 
 
+router.delete('/:id', (req, res) => {
+    const {id} = req.params;
+    const query = `DELETE FROM tbprodutos WHERE id_produto = ?`;
+
+    dbConecta.query(query, [id], (err, result) =>{
+        if (err) throw err;
+        res.status(201).json({
+            mensagem: `Produto de id: ${id}, deletado com sucesso!`
+        })
+    });
+});
+
+router.put('/:id', (req, res) => {
+    const {id} = req.params;
+    const {id_produto, nome, valor, quantidade} = req.body;
+    const query = `UPDATE tbprodutos SET id_produto = ?, 
+        nome = ?, valor = ?, quantidade = ? 
+        WHERE id_produto = ?`
+
+    dbConecta.query(query, [id_produto, nome, valor, quantidade, id], (err)=>{
+        if(err) throw err;
+        res.status(201).json({
+            mensagem: `Alteração aplicada!`,
+            envio: {
+                id_produto : id_produto,
+                nome: nome,
+                valor: valor,
+                quantidade: quantidade
+            }
+        })
+    })
+});
+    
+
+
+
+
 module.exports = router;
